@@ -121,7 +121,7 @@ locations.forEach((l) => {
 
 **正例**:
 ```javascript
-var locations = ['Austin', 'New York', 'San Francisco'];
+const locations = ['Austin', 'New York', 'San Francisco'];
 locations.forEach((location) => {
   doStuff();
   doSomeOtherStuff();
