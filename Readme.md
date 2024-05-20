@@ -33,7 +33,7 @@ const yearMonthDay = moment().format('YYYY/MM/DD');
 ### 使用 ES6 的 const 定義常數
 使用 const 宣告不可變量，如果為可變量使用 let 宣告。
 
-ps. ES6 之後的版本已經不推薦使用 var （會需要考慮提升的問題）。
+ES6 之後的版本已經不推薦使用 var（會需要考慮 hoisting 和作用域）。
 
 **反例**:
 ```javascript
@@ -46,7 +46,7 @@ const FIRST_US_PRESIDENT = "George Washington";
 ```
 **[回到目錄](#目錄)**
 
-### 对功能类似的变量名采用统一的命名风格
+### 對功能類似的變量名稱採用統一的命名風格
 
 **反例**:
 ```javascript
