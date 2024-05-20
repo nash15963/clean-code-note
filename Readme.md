@@ -192,10 +192,10 @@ function createMicrobrewery(name) {
 ## 類
 
 ## 參考資料
-- [clean-code.md]("https://gist.github.com/wojteklu/73c6914cc446146b8b533c0988cf8d29")
+- [clean-code.md](https://gist.github.com/wojteklu/73c6914cc446146b8b533c0988cf8d29)
 
-- [clean-code-js]("https://github.com/ryanmcdermott/clean-code-javascript")
+- [clean-code-js](https://github.com/ryanmcdermott/clean-code-javascript)
 
-- [clean-code-js 簡體中文]("https://github.com/alivebao/clean-code-js?tab=readme-ov-file#%E5%B9%B6%E5%8F%91")
+- [clean-code-js 簡體中文](https://github.com/alivebao/clean-code-js?tab=readme-ov-file#%E5%B9%B6%E5%8F%91)
 
-- [Clean Code 無瑕的程式碼 讀書心得]("https://www.mropengate.com/2022/10/clean-code.html")
+- [Clean Code 無瑕的程式碼 讀書心得](https://www.mropengate.com/2022/10/clean-code.html)
