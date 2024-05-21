@@ -585,10 +585,10 @@ function createFile(name) {
 ### 避免副作用的寫法
 帶有副作用寫法的函數可能會因為不可預期的行為而導致程式碼的狀態難以預測。
 
+> Side effects are lies. Your function promises to do one thing, but it also does other hidden things. Sometimes it will make unexpected changes to the variables of its own class. Sometimes it will make them to the parameters passed into the function or to system globals. In either case they are devious and damaging mistruths that often result in strange temporal couplings and order dependencies. 
+
 **反例**:
 ```javascript
-// Global variable referenced by following function.
-// If we had another function that used this name, now it'd be an array and it could break it.
 let name = 'Ryan McDermott';
 
 function splitIntoFirstAndLastName() {
@@ -933,6 +933,84 @@ function handleSubmit() {
 }
 
 ```
+**[回到目錄](#目錄)**
+
+### Extract Try/Catch Blocks
+這個規則的主要思想是分離主要業務邏輯和錯誤處理邏輯。當你在程式碼中需要處理異常時，應該將 try/catch 塊提取到一個獨立的函數中，這樣可以讓主要的業務邏輯更加簡潔明了，並且錯誤處理邏輯也會更加集中。
+
+函數應該只做一件事。錯誤處理就是一件事。
+
+**反例**:
+```javascript
+function mainFunction() {
+  try {
+    // 主要業務邏輯
+    let data = fetchData();
+    processData(data);
+  } catch (error) {
+    console.error('An error occurred:', error);
+  }
+}
+
+function fetchData() {
+  // 模擬異常
+  if (Math.random() > 0.5) {
+    throw new Error('Failed to fetch data');
+  }
+  return { key: 'value' };
+}
+
+function processData(data) {
+  console.log('Processing data:', data);
+}
+
+mainFunction();
+
+
+```
+
+**正例**:
+```javascript
+function mainFunction() {
+  try {
+    executeMainLogic();
+  } catch (error) {
+    handleMainError(error);
+  }
+}
+
+function executeMainLogic() {
+  // 主要業務邏輯
+  let data = fetchData();
+  processData(data);
+}
+
+function handleMainError(error) {
+  console.error('An error occurred:', error);
+}
+
+function fetchData() {
+  // 模擬異常
+  if (Math.random() > 0.5) {
+    throw new Error('Failed to fetch data');
+  }
+  return { key: 'value' };
+}
+
+function processData(data) {
+  console.log('Processing data:', data);
+}
+
+mainFunction();
+
+
+```
+**[回到目錄](#目錄)**
+
+### HOW DO YOU WRITE FUNCTIONS LIKE THIS? 如何寫出乾淨的函數
+> Writing software is like any other kind of writing. When you write a paper or an article, you get your thoughts down first, then you massage it until it reads well. The first draft might be clumsy and disorganized, so you wordsmith it and restructure it and refine it until it reads the way you want it to read.
+
+**[回到目錄](#目錄)**
 
 
 ## 對象和數據結構
