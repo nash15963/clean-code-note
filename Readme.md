@@ -15,6 +15,11 @@
   11. [參考資料](#參考資料)
 
 ## 介绍
+本篇文章大量參考了以下兩篇文章的範例，旨在展示如何用不同語言實現正反面的寫法：
+- [ryanmcdermott/clean-code-javascript](https://github.com/ryanmcdermott/clean-code-javascript)
+- [alivebao/clean-code-js](https://github.com/alivebao/clean-code-js)
+
+除了參考上述兩篇文章，本篇文章還增加了一些說明，以及一些在原著中提到但未收錄於 JavaScript 版 Clean Code 範例的觀念。如果在閱讀過程中發現錯誤或有其他想法，歡迎提交 PR，一起完成文章。
 
 ## 變量
 ### 可讀性的變量名稱
@@ -82,7 +87,7 @@ for (const i = 0; i < MINUTES_IN_A_YEAR; i++) {
 ```
 **[回到目錄](#目錄)**
 
-### 使用说明變量
+### 使用說明變量
 避免在複雜邏輯中直接使用數字或字符串，使用說明變量來解釋數字或字符串的意義。
 在下面的例子中，saveCityState 這個 function 的參數可讀性因過長的正則表達式而變差。
 
