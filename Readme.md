@@ -5,21 +5,21 @@
   1. [介绍](#介绍)
   2. [變量](#變量)
   3. [函数](#函數)
-  4. [對象和數據結構](#objects-and-data-structures)
-  5. [類](#類)
-  6. [測試](#測試)
-  7. [開發](#開發)
-  8. [錯誤處理](#錯誤處理)
-  9. [格式化](#格式化)
-  10. [註解](#註解)
-  11. [參考資料](#參考資料)
+  4. [註解](#註解)
+  5. [參考資料](#參考資料)
+
+## TODO
+  1. [測試](#測試)
+  2. [開發](#開發)
+  3. [錯誤處理](#錯誤處理)
+  4. [排版](#排版)
 
 ## 介绍
 本篇文章大量參考了以下兩篇文章的範例，旨在展示如何用不同語言實現正反面的寫法：
 - [ryanmcdermott/clean-code-javascript](https://github.com/ryanmcdermott/clean-code-javascript)
 - [alivebao/clean-code-js](https://github.com/alivebao/clean-code-js)
 
-除了參考上述兩篇文章，本篇文章還增加了一些說明，以及一些在原著中提到但未收錄於 JavaScript 版 Clean Code 範例的觀念。如果在閱讀過程中發現錯誤或有其他想法，歡迎提交 PR，一起完成文章。
+如果在閱讀過程中發現錯誤或有其他想法，歡迎指教與編輯。
 
 ## 變量
 ### 可讀性的變量名稱
@@ -38,7 +38,7 @@ const yearMonthDay = moment().format('YYYY/MM/DD');
 ### 使用 ES6 的 const 定義常數
 使用 const 宣告不可變量，如果為可變量使用 let 宣告。
 
-ES6 之後的版本已經不推薦使用 var（會需要考慮 hoisting 和作用域）。
+ES6 之後的版本已經不推薦使用 var（會需要考慮 hoisting 和作用域，ESlint 規則）。
 
 **反例**:
 ```javascript
@@ -1017,10 +1017,135 @@ mainFunction();
 
 **[回到目錄](#目錄)**
 
+## 註解
 
-## 對象和數據結構
+Nothing can be quite so helpful as a well-placed comment. Nothing can clutter up a module more than frivolous dogmatic comments. Nothing can be quite so damaging as an old crufty comment that propagates lies and misinformation.
 
-## 類
+沒有什麼可以比一段放對位置的註解，更能提供助益。沒有什麼可以比一段無聊教條式的註解更能弄亂模組。也沒有什麼可以比一段陳舊而混淆不清的註解更能傳播有害的謊言及提供錯誤的資訊。
+
+- 註解無法彌補糟糕的程式碼，用程式碼表達本意
+
+
+
+### 好的註解 - 範例
+
+```javascript
+// 法律型註解
+// 版權所有 (C) 2024 John Doe
+// 此代碼僅用於教育目的
+
+/**
+ * 資訊型註解：此函數用於計算兩數之和
+ * @param {number} a - 第一個數
+ * @param {number} b - 第二個數
+ * @returns {number} - 返回兩數之和
+ */
+function add(a, b) {
+  return a + b;
+}
+
+/**
+ * 意圖的解釋：此函數用於檢查使用者是否已經登入
+ * @returns {boolean} - 返回使用者是否已經登入
+ */
+function isUserLoggedIn() {
+  // 闡明：通過檢查本地儲存的token來判斷
+  return localStorage.getItem('userToken') !== null;
+}
+
+// 對於後果的告誡：這裡有一個隨機數產生器，可能會影響應用程式的行為
+// 使用前請確保你了解其影響
+function getRandomNumber() {
+  return Math.random();
+}
+
+// TODO: 需要實現使用者驗證邏輯
+function authenticateUser() {
+  // 暫未實現
+}
+
+// 放大重要性：以下函數非常重要，因為它處理了所有的使用者數據
+function processUserData(user) {
+  // 處理使用者數據的邏輯
+}
+```
+
+### 壞的註解 - 範例
+
+```javascript
+// 喃喃自語：這裡好像在做什麼
+function foo() {
+  var a = 1; // 設置a為1
+  var b = 2; // 設置b為2
+  return a + b; // 返回a和b的和
+}
+
+// 多餘的註解：程式碼本身已經很清晰
+var x = 5; // 宣告x並賦值為5
+
+// 誤導型註解：這裡的註解與程式碼不符
+// 計算兩數之差
+function add(a, b) {
+  return a + b; // 實際是計算兩數之和
+}
+
+// 規定型註解：在變數宣告時進行不必要的解釋
+// var用於宣告變數
+var y = 10;
+
+// 日誌型註解：不要使用註解來記錄已完成的工作
+// 2024-06-23: 完成使用者驗證邏輯
+function authenticateUser() {
+  // 驗證邏輯
+}
+
+// 干擾型註解：註解過多反而讓程式碼更難讀
+// 檢查x是否大於10，如果是，則返回true，否則返回false
+if (x > 10) {
+  return true; // 返回true
+} else {
+  return false; // 返回false
+}
+
+// 當你可以使用函數或變數時就不要使用註解
+// 檢查使用者是否已登入
+if (localStorage.getItem('userToken') !== null) {
+  return true; // 使用者已登入
+} else {
+  return false; // 使用者未登入
+}
+
+// 註解起來的程式碼：這樣的註解很容易造成混淆，應該刪除不再使用的程式碼
+// function oldFunction() {
+//   console.log('This is an old function');
+// }
+```
+
+### 解釋
+
+- **好的註解**:
+  - **法律型註解**: 在文件的最上方，用於法律聲明和版權資訊，盡量不要寫在程式碼內文中導致難以閱讀。
+  - **資訊型註解**: 為函數提供額外的資訊和上下文。
+  - **意圖的解釋**: 解釋為什麼需要這段程式碼，而不是它做了什麼。
+  - **闡明**: 有時候註解可以更巧妙的澄清程式碼，和其可讀性的意義。
+  - **對於後果的告誡**: 提醒開發者注意可能的副作用。
+  - **TODO**: 記錄需要在未來完成的工作。
+  - **放大重要性**: 強調某段程式碼的重要性。
+
+- **壞的註解**:
+  - **喃喃自語**: 冗長且無用的註解，沒有提供任何新的資訊。
+  - **多餘的註解**: 不必要的註解，程式碼已經很明顯。
+  - **誤導型註解**: 註解與程式碼不符，會讓開發者困惑。
+  - **規定型註解**: 解釋基本概念，沒有實際意義。
+  - **日誌型註解**: 用於記錄已完成的工作，應使用版本控制系統。
+  - **干擾型註解**: 註解過多，使程式碼更難讀。
+  - **當你可以使用函數或變數時就不要使用註解**: 使用自描述的函數或變數名來代替註解。
+  - **註解起來的程式碼**: 不再使用的程式碼應該刪除，而不是註解起來。
+
+**[回到目錄](#目錄)**
+
+
+
 
 ## 參考資料
 - [clean-code.md](https://gist.github.com/wojteklu/73c6914cc446146b8b533c0988cf8d29)
